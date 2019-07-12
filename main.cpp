@@ -20,15 +20,10 @@ int main(void) {
    list->addAt(2,-9);
    list->addBack(212);
    list->addFront(-11);
-   //-11,7,-1,99,21,212
   
-   
-
    list->deleteAt(5);
    list->deleteAt(2);
    list->deleteAt(0);
-   
-   //list->deleteAt(3);
 
    cout << "List Size: " << list->size() << endl;
    cout<<"Randomize list"<<endl;

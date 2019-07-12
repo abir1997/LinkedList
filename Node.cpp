@@ -4,12 +4,9 @@
 using std::cout;
 using std::endl;
 Node::Node(int data, Node* next) :
-   // data(data),
-   // next(next),
-   // prev(nullptr)
    Node(data,next,nullptr)
 {
-   // cout << "Node Create: " << data << endl;
+    cout << "Node Create: " << data << endl;
 }
 
 Node::Node(int data, Node* next,Node* prev) :
