@@ -1,13 +1,11 @@
-
 #include "LinkedList.h"
-
 #include <iostream>
 #include <stdexcept>
-#include <string>
+#include <vector>
+#include <algorithm>
 
-
-using std::cout;
 using std::endl;
+
 LinkedList::LinkedList()
 {
     head = nullptr;
@@ -32,14 +30,13 @@ int LinkedList::size() const
     return count;
 }
 
-int LinkedList::getSize()
+unsigned int LinkedList::getSize()
 {
     return sizeCount;
 }
 
 void LinkedList::clear()
 {
-    cout << "Clearing node" << endl;
     while (this->head != nullptr)
     {
         Node *toDelete = this->head;
@@ -51,10 +48,10 @@ void LinkedList::clear()
     sizeCount = 0;
 }
 
-int LinkedList::get(int i)
+int LinkedList::get(unsigned int i)
 {
     Node *node = this->head;
-    for (int count = 0; count < i; ++count)
+    for (unsigned int count = 0; count < i; ++count)
     {
         node = node->next;
     }
@@ -118,7 +115,6 @@ void LinkedList::deleteFront()
 
         if (head == nullptr)
         {
-            //1 in the list
             this->tail = nullptr;
         }
         else
@@ -150,18 +146,18 @@ void LinkedList::deleteBack()
     sizeCount--;
 }
 
-void LinkedList::deleteAt(int i)
+void LinkedList::deleteAt(unsigned int i)
 {
     if (i == 0)
     {
         deleteFront();
     }
-    else if (i < this->size())
+    else if (i < this->getSize())
     {
         Node *node = this->head;
 
         //find node to be deleted
-        for (int count = 0; count < i; ++count)
+        for (unsigned int count = 0; count < i; ++count)
         {
             node = node->next;
         }
@@ -188,16 +184,16 @@ void LinkedList::deleteAt(int i)
     }
     else
     {
-        cout << "ERR" << endl;
+        std::cout << "Invalid index" << endl;
     }
 }
 
-Node *LinkedList::getNodeAt(int i)
+Node *LinkedList::getNodeAt(unsigned int i)
 {
     Node *retVal = this->head;
     if (i < this->getSize())
     {
-        for (int count = 0; count < i; ++count)
+        for (unsigned int count = 0; count < i; ++count)
         {
             retVal = retVal->next;
         }
@@ -205,7 +201,7 @@ Node *LinkedList::getNodeAt(int i)
     return retVal;
 }
 
-void LinkedList::addAt(int i, int data)
+void LinkedList::addAt(unsigned int i, int data)
 {
 
     Node *newNode = new Node(data, nullptr, nullptr);
@@ -217,7 +213,6 @@ void LinkedList::addAt(int i, int data)
     {
 
         Node *currNode = getNodeAt(i);
-        cout << "Node to be replaced " << currNode->data << endl;
         //get currNode's prev node
         Node *prevNode = currNode->prev;
         prevNode->next = newNode;
@@ -230,7 +225,27 @@ void LinkedList::addAt(int i, int data)
 
     else
     {
-        cout << "Invalid index" << endl;
+        std::cout << "Invalid index" << endl;
     }
 }
 
+void LinkedList::shuffle(){
+    if(head != nullptr && this->getSize() > 1){
+
+        std::vector<int> nodeVec;
+        for(unsigned int i=0; i < this->getSize(); ++i){
+            nodeVec.push_back(this->get(i));
+        }
+
+        std::random_shuffle(nodeVec.begin(),nodeVec.end());
+        this->clear();
+
+        for(unsigned int i=0; i < nodeVec.size(); ++i){
+            this->addBack(nodeVec.at(i));
+        }
+
+        //std::cout<<"After shufffle : "<<this->getSize();
+    }else{
+        std::cout<<"Nothing to shuffle"<<endl;
+    }
+}

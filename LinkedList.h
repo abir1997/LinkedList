@@ -13,9 +13,9 @@ public:
    int size() const;
 
    // A more efficient way to get the size of the list.
-   int getSize();
+   unsigned int getSize();
    void clear();
-   int get(int i);
+   int get(unsigned int i);
 
    void addFront(const int data);
    void addBack(const int data);
@@ -25,11 +25,11 @@ public:
    void deleteBack();
 
    //delete node at an index.
-   void deleteAt(int i);
+   void deleteAt(unsigned int i);
 
-   Node* getNodeAt(int i);
+   Node* getNodeAt(unsigned int i);
    //add node at an index.
-   void addAt(int i,int data);
+   void addAt(unsigned int i,int data);
 
    void shuffle();
 
@@ -37,7 +37,7 @@ public:
 private:
    Node* head;
    Node* tail;
-   int sizeCount;
+   unsigned int sizeCount;
 
    Node* addBack(Node* node,int data);
 };
